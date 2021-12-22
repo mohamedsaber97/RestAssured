@@ -7,7 +7,7 @@ import io.restassured.RestAssured;
 
 public class Hocks extends TestBase {
 
-    @Before
+    @Before("@valid or @invalid")
     public void beforeTest() {
         RestAssured.baseURI = baseUrl;
         request = RestAssured.given();

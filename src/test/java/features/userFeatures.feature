@@ -1,5 +1,6 @@
 Feature: Test user for Reqres Api
 
+  @valid
   Scenario: User can register with valid data and show list of users
     Given User has valid register data
     When User sends his data
