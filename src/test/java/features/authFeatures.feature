@@ -1,19 +1,19 @@
-Feature: Test authentication for Reqres Api
+Feature: Test authentication for client
 
-  @valid
+  @register
   Scenario: User can register with valid data
     Given User has valid register data
     When User sends his data
-    Then The token is returned
+    Then The response is returned and user saves userId and activation code
 
-  @invalid
-  Scenario Outline: User can register with invalid data
-    Given User has "<email>" and "<password>"
-    When User sends his data
-    Then The error is returned
-
+  @login
+  Scenario Outline: User can login with valid data
+    Given User has "<phone>" and "<password>"
+    When User sends his login data
+    Then The response is returned and user saves userId and activation code
     Examples:
-      | email     | password  |
-      | saber1234 |           |
-      |           | 123456789 |
-      | saber1234 | 123456789 |
+      | phone      | password |
+      | 0100100100 | 12345678 |
+      | 0100000099 | 123456   |
+      | 0100000099 | 12345678 |
+      | 0100100100 | 123456   |
