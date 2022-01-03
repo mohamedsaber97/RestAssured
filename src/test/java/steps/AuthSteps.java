@@ -6,25 +6,30 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
 
+import java.io.File;
+
 public class AuthSteps extends TestBase {
+
+    File img = new File("assets/8gAMEy.jpg");
 
     @Given("User has valid register data")
     public void userHasValidRegisterData() {
         body.put("userName", "saber2");
-        body.put("phone", "0200000000");
-        body.put("InvitationCode", "123456789");
+        body.put("phone", "0100100101");
         body.put("password", "123456");
         body.put("deviceId", "1");
         body.put("deviceType", "android");
-        body.put("projectName", "khadamialeisi");
+        body.put("projectName", "wasetalsumaili");
         body.put("lang", lang);
+        body.put("Lat", "33.123");
+        body.put("Lng", "32.123");
+        body.put("Location", "elmansoura - istad");
     }
 
-    @When("User sends his data")
-    public void userSendsHisData() {
-        response = request.post("RegisterClient");
+    @When("User sends his register data")
+    public void userSendsHisRegisterData() {
+        response = request.formParams(body).multiPart(img).when().post("RegisterClient");
         stringResponse = response.asString();
-        data = JsonPath.from(stringResponse).get("data");
     }
 
     @Given("User has {string} and {string}")

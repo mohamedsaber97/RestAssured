@@ -22,7 +22,7 @@ public class Hocks extends TestBase {
         request = RestAssured.given();
     }
 
-    @Before("@login")
+    @Before
     public void beforeReg() {
         RestAssured.baseURI = baseUrl;
         request = RestAssured.given().log().all()
