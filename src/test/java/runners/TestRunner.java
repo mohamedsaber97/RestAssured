@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/java/features",
         glue = "steps",
         plugin = {"pretty", "html:target/reports/httpReport.html", "json:target/reports/jsonReport.json"},
-        tags = "@register"
+        tags = "@user"
 )
 public class TestRunner {
 }

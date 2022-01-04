@@ -1,16 +1,16 @@
 Feature: Test authentication for client
 
-  @register
+  @auth @register
   Scenario: User can register with valid data
     Given User has valid register data
     When User sends his register data
-    Then The response is returned and user saves userId and activation code
+    Then The response and data are returned
 
-  @login
+  @auth @login
   Scenario Outline: User can login with data
-    Given User has "<phone>" and "<password>"
+    Given User has "<phone>" and "<password>" to login
     When User sends his login data
-    Then The response is returned and user saves userId and activation code
+    Then The response and data are returned
     Examples:
       | phone      | password |
       | 0100100100 | 12345678 |

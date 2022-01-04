@@ -30,10 +30,11 @@ public class AuthSteps extends TestBase {
     public void userSendsHisRegisterData() {
         response = request.formParams(body).multiPart(img).when().post("RegisterClient");
         stringResponse = response.asString();
+        statusCode = response.getStatusCode();
     }
 
-    @Given("User has {string} and {string}")
-    public void userHasAnd(String phone, String pass) {
+    @Given("User has {string} and {string} to login")
+    public void userHasAndToLogin(String phone, String pass) {
         body.put("phone", phone);
         body.put("password", pass);
         body.put("lang", lang);
@@ -48,20 +49,9 @@ public class AuthSteps extends TestBase {
         response = request.formParams(body).when().post("login");
         stringResponse = response.asString();
         statusCode = response.getStatusCode();
+        token = "Bearer " + JsonPath.from(stringResponse).get("token");
+        printToken();
     }
 
-    @Then("The response is returned and user saves userId and activation code")
-    public void theResponseIsReturnedAndUserSavesUserIdAndActivationCode() {
-        if (statusCode == 200) {
-            userId = JsonPath.from(stringResponse).get("id");
-            code = JsonPath.from(stringResponse).get("code");
-            token = JsonPath.from(stringResponse).get("token");
-            System.out.println("-----userId is : " + userId);
-            System.out.println("-----code is : " + code);
-            printToken();
-        } else {
-            printResponse();
-        }
-    }
 
 }
